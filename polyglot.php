@@ -16,14 +16,15 @@ Update: http://fredfred.net/skriker/plugin-update.php?p=198
 */
 
 // Default language version - used when proper language version of the text is not present or the visitor's prefered language is unknown
-$polyglot_settings['default_lang'] = 'en';
+//$polyglot_settings['default_lang'] = 'en';
+$polyglot_settings['default_lang'] = 'fr';
 
 //You can define your own translations of language shortcuts 
 
-$polyglot_settings['trans']['en'] = 'english';
+$polyglot_settings['trans']['en'] = 'English';
 $polyglot_settings['trans']['de'] = 'deutsch';
 $polyglot_settings['trans']['nl'] = 'nederlands';
-$polyglot_settings['trans']['fr'] = 'française';
+$polyglot_settings['trans']['fr'] = 'Français';
 
 $polyglot_settings['trans']['cs'] = 'česky';
 $polyglot_settings['trans']['it'] = 'italiano';
@@ -31,7 +32,8 @@ $polyglot_settings['trans']['sv'] = 'svenska';
 
 
 //Which language versions you offer for the whole web - use the proper ISO codes!
-$polyglot_settings['knownlangs'] = array('en','cs','sv');
+//$polyglot_settings['knownlangs'] = array('en','cs','sv');
+$polyglot_settings['knownlangs'] = array('fr','en');
 
 //set to 'true' if there should be shown flags instead of names of languages
 $polyglot_settings['use_flags'] = true;
@@ -39,10 +41,12 @@ $polyglot_settings['use_flags'] = true;
 //list of ISO codes and their image represantations (flags).
 //all flags can be found in 'polyglot_flags' directory
 
-$polyglot_settings['flags']['en'] = 'gb.png';
+#$polyglot_settings['flags']['en'] = 'gb.png';
+$polyglot_settings['flags']['en'] = 'us-uk.png';
 $polyglot_settings['flags']['de'] = 'de.png';
 $polyglot_settings['flags']['nl'] = 'nl.png';
-$polyglot_settings['flags']['fr'] = 'fr.png';
+#$polyglot_settings['flags']['fr'] = 'fr.png';
+$polyglot_settings['flags']['fr'] = 'qc-fr.png';
 
 $polyglot_settings['flags']['cs'] = 'cz.png';
 $polyglot_settings['flags']['it'] = 'it.png';
@@ -332,6 +336,26 @@ If the Polyglot is supposed to change the global language settings then... let's
 
 
 
+function polyglot_set_lang($new_lang='en') {
+  global $polyglot_settings,$locale,$l10n;
+
+  $polyglot_settings['lang_pref'] = $new_lang;
+  
+//   if (!defined('WPLANG')){//just try
+//     define('WPLANG', $new_lang);
+//   }
+
+  $locale = $new_lang;
+
+  if ($new_lang=='en') {
+    unset($l10n['default']);
+  }
+  else {
+    load_default_textdomain();
+  }
+  
+
+}
 
 
 /**
@@ -504,6 +528,8 @@ function polyglot_lang_exists($lang, $content){
     return (   !(strpos($content, "<lang_$lang>") === false) || !(strpos($content, "[lang_$lang]") === false)   );
 }
 
+function polyglot_get_langs() { global $polyglot_settings; return $polyglot_settings['knownlangs']; }
+
 function polyglot_list_langs($flags=false){
 	global $polyglot_settings,$wp_query;
 				$clean_uri = polyglot_uri_cleaner($_SERVER['REQUEST_URI']);
@@ -516,15 +542,20 @@ function polyglot_list_langs($flags=false){
 				}
 				
 				
+				  $tmp_i=0;
 					foreach($polyglot_settings['knownlangs'] as  $value){
 						
+					  $tmp_i++;
 						if ( $value==$polyglot_settings['lang_pref'] ) {
 							$highlight = "language_item current_language_item";
 						} else {
 							$highlight = "language_item";
 						}
-						echo "<li class=\"$highlight\"><a href=\"";
-						
+						//echo "<li class=\"$highlight\"><a href=\"";
+if ($tmp_i>1) echo "&nbsp;&nbsp;";
+//if ($tmp_i>1) echo "  ";
+						echo "<a href=\"";
+
 						if(  $polyglot_settings['lang_rewrite'] ){
 							
 							if(strpos(get_settings('permalink_structure'),'index.php') === FALSE){
@@ -561,7 +592,9 @@ function polyglot_list_langs($flags=false){
 							//}
 						
 						}
-						echo "\">". (($flags) ? "<img src=\"".$polyglot_settings['path_to_flags'].$polyglot_settings['flags'][$value] ."\" alt=\"".get_trans($value)."\" title=\"".get_trans($value)."\" />" : get_trans($value)) ."</a></li>";
+//						echo "\">". (($flags) ? "<img src=\"".$polyglot_settings['path_to_flags'].$polyglot_settings['flags'][$value] ."\" alt=\"".get_trans($value)."\" title=\"".get_trans($value)."\" />" : get_trans($value)) ."</a></li>";
+//						echo "\">". (($flags) ? "<img src=\"".$polyglot_settings['path_to_flags'].$polyglot_settings['flags'][$value] ."\" alt=\"".get_trans($value)."\" title=\"".get_trans($value)."\" />" : get_trans($value)) ."</a>&nbsp;&nbsp;&nbsp;";
+						echo "\">". (($flags) ? "<img src=\"".$polyglot_settings['path_to_flags'].$polyglot_settings['flags'][$value] ."\" alt=\"".get_trans($value)."\" title=\"".get_trans($value)."\" />" : get_trans($value)) ."</a>";
 					}
 }
 
@@ -984,7 +1017,8 @@ if(strpos($_SERVER['REQUEST_URI'], 'wp-admin') === false){
 /**
 * ABP: filter array values
 */
-function &polyglot_filter_array(&$ar){
+//function &polyglot_filter_array(&$ar){
+function &polyglot_filter_array($ar){
   foreach($ar as $k => $v){
     if(is_array($v)){
       $ar[$k] = polyglot_filter_array($v);
@@ -997,10 +1031,13 @@ function &polyglot_filter_array(&$ar){
 
 //get_the_tags - processor
 
-function polyglot_get_the_tags(&$tags)
+function polyglot_get_the_tags($tags)
 {
+	if(empty($tags)) return $tags;
+	print_r($tags);
   foreach($tags as $tag)
   {
+	  echo 'tag: '.$tag."<br>";
     $tag->name = polyglot_filter($tag->name);
   }
   
@@ -1010,8 +1047,9 @@ function polyglot_get_the_tags(&$tags)
 
 //get_bookmarks - processor
 
-function polyglot_get_bookmarks(&$bookmarks)
+function polyglot_get_bookmarks($bookmarks)
 {
+	if(empty($bookmarks)) return $bookmarks;
   foreach($bookmarks as $bookmark)
   {
     $bookmark->link_name = polyglot_filter($bookmark->link_name);
