@@ -33,7 +33,7 @@ $polyglot_settings['trans']['sv'] = 'svenska';
 
 //Which language versions you offer for the whole web - use the proper ISO codes!
 //$polyglot_settings['knownlangs'] = array('en','cs','sv');
-$polyglot_settings['knownlangs'] = array('fr','en');
+$polyglot_settings['knownlangs'] = array('fr','en','pt');
 
 //set to 'true' if there should be shown flags instead of names of languages
 $polyglot_settings['use_flags'] = true;
@@ -41,12 +41,13 @@ $polyglot_settings['use_flags'] = true;
 //list of ISO codes and their image represantations (flags).
 //all flags can be found in 'polyglot_flags' directory
 
-#$polyglot_settings['flags']['en'] = 'gb.png';
+//$polyglot_settings['flags']['en'] = 'gb.png';
 $polyglot_settings['flags']['en'] = 'us-uk.png';
 $polyglot_settings['flags']['de'] = 'de.png';
 $polyglot_settings['flags']['nl'] = 'nl.png';
-#$polyglot_settings['flags']['fr'] = 'fr.png';
+//$polyglot_settings['flags']['fr'] = 'fr.png';
 $polyglot_settings['flags']['fr'] = 'qc-fr.png';
+$polyglot_settings['flags']['pt'] = 'br.png';
 
 $polyglot_settings['flags']['cs'] = 'cz.png';
 $polyglot_settings['flags']['it'] = 'it.png';
@@ -70,7 +71,8 @@ $polyglot_settings['date_format']['cs'] = 'j. n. Y';
 /*path to the plugin directory
 don't forget trailing slash if you are changing this value
 */
-$polyglot_settings['path_to_flags'] = get_bloginfo('wpurl').'/wp-content/plugins/polyglot_flags/';
+//$polyglot_settings['path_to_flags'] = get_bloginfo('wpurl').'/wp-content/plugins/polyglot/polyglot_flags/';
+$polyglot_settings['path_to_flags'] = plugins_url() . '/polyglot/polyglot_flags/';
 
 //if you use WP older than 1.5 you must use this:
 //$polyglot_settings['path_to_flags'] = get_bloginfo('url').'/wp-content/plugins/';
