@@ -71,6 +71,22 @@ add_filter('sanitize_title', 'polyglot_sanitize_title', 1);
 add_filter('polyglot_filter','polyglot_filter');
 
 
+// UI
+// add more buttons to the html editor
+function polyglot_add_quicktags() {
+    if (wp_script_is('quicktags')){
+		echo '<script type="text/javascript">' . PHP_EOL;
+		//QTags.addButton( 'eg_paragraph', 'p', '<p>', '</p>', 'p', 'Paragraph tag', 1 );
+		foreach (polyglot_knownlangs() as $key) {
+			$lang = get_trans($key);
+			$l = "lang_" . $key;
+			echo "  QTags.addButton( 'polyglot_" . $key . "', '" . $l . "', '[" . $l . "]', '[/" . $l . "]', '', 'Language (" . $lang . ")',999);" . PHP_EOL;
+		}
+		echo '</script>' . PHP_EOL;
+    }
+}
+add_action( 'admin_print_footer_scripts', 'polyglot_add_quicktags' );
+
 
 //here we try to guess which language user wants
 //========================================
