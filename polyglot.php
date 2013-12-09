@@ -72,6 +72,7 @@ add_filter('polyglot_filter','polyglot_filter');
 
 
 // UI
+
 // add more buttons to the html editor
 function polyglot_add_quicktags() {
     if (wp_script_is('quicktags')){
@@ -86,6 +87,41 @@ function polyglot_add_quicktags() {
     }
 }
 add_action( 'admin_print_footer_scripts', 'polyglot_add_quicktags' );
+
+// add tinymce buttons
+// http://wp.tutsplus.com/tutorials/theme-development/guide-to-creating-your-own-wordpress-editor-buttons/
+if(is_admin()) {
+	//require_once(ABSPATH . 'wp-includes/pluggable.php');
+if ( get_user_option('rich_editing') == 'true') {
+	global $polyglot_settings;
+
+	add_action( 'init', 'polyglot_buttons' );
+
+	echo '<script type="text/javascript">' . PHP_EOL;
+	echo '  var polyglot_known_langs = ' . json_encode(polyglot_knownlangs()) . ';' . PHP_EOL;
+	echo '  var polyglot_translations = ' . json_encode(polyglot_translations()) . ';' . PHP_EOL;
+	echo '  var polyglot_flags = ' . json_encode($polyglot_settings['flags-20']) . ';' . PHP_EOL;
+	echo '</script>'. PHP_EOL;
+}
+}
+
+function polyglot_buttons() {
+    add_filter( "mce_external_plugins", "polyglot_add_buttons" );
+    add_filter( 'mce_buttons', 'polyglot_register_buttons' );
+}
+function polyglot_add_buttons( $plugin_array ) {
+    $plugin_array['polyglot'] = 'plugins/polyglot/polyglot_plugin.js';
+    return $plugin_array;
+}
+function polyglot_register_buttons( $buttons ) {
+	foreach (polyglot_knownlangs() as $lang) {
+		array_push( $buttons, 'polyglot_' . $lang );
+	}
+    return $buttons;
+}
+
+
+//----------------------------------------------------------------------------
 
 
 //here we try to guess which language user wants

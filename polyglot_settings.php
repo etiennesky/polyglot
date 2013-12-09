@@ -9,14 +9,16 @@ $polyglot_settings['default_lang'] = 'fr';
 //You can define your own translations of language shortcuts 
 
 $polyglot_settings['trans']['en'] = 'English';
+$polyglot_settings['trans']['fr'] = 'Français';
+$polyglot_settings['trans']['pt'] = 'Português';
+
+/*
 $polyglot_settings['trans']['de'] = 'deutsch';
 $polyglot_settings['trans']['nl'] = 'nederlands';
-$polyglot_settings['trans']['fr'] = 'Français';
-
 $polyglot_settings['trans']['cs'] = 'česky';
 $polyglot_settings['trans']['it'] = 'italiano';
 $polyglot_settings['trans']['sv'] = 'svenska';
-
+*/
 
 //Which language versions you offer for the whole web - use the proper ISO codes!
 //$polyglot_settings['knownlangs'] = array('en','cs','sv');
@@ -30,15 +32,26 @@ $polyglot_settings['use_flags'] = true;
 
 //$polyglot_settings['flags']['en'] = 'gb.png';
 $polyglot_settings['flags']['en'] = 'us-uk.png';
-$polyglot_settings['flags']['de'] = 'de.png';
-$polyglot_settings['flags']['nl'] = 'nl.png';
 //$polyglot_settings['flags']['fr'] = 'fr.png';
 $polyglot_settings['flags']['fr'] = 'qc-fr.png';
 $polyglot_settings['flags']['pt'] = 'br.png';
 
+$polyglot_settings['flags']['en'] = 'gb.png';
+$polyglot_settings['flags']['fr'] = 'fr.png';
+$polyglot_settings['flags']['pt'] = 'br.png';
+
+// these flags are 20x20px for use in the tinymce editor
+$polyglot_settings['flags-20']['en'] = 'gb-20.png';
+$polyglot_settings['flags-20']['fr'] = 'fr-20.png';
+$polyglot_settings['flags-20']['pt'] = 'br-20.png';
+
+/*
+$polyglot_settings['flags']['de'] = 'de.png';
+$polyglot_settings['flags']['nl'] = 'nl.png';
 $polyglot_settings['flags']['cs'] = 'cz.png';
 $polyglot_settings['flags']['it'] = 'it.png';
 $polyglot_settings['flags']['sv'] = 'se.png';
+*/
 
 //time format for each language
 //if not set - default WP time format is used
