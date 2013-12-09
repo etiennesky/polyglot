@@ -1,1 +1,3 @@
 These flags come from http://www.phpmyvisites.net/
+-24.png flags are from IconDrawer http://icondrawer.com/ http://www.iconarchive.com/show/flags-icons-by-icondrawer.html
+

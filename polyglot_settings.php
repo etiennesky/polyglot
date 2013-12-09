@@ -36,14 +36,14 @@ $polyglot_settings['flags']['en'] = 'us-uk.png';
 $polyglot_settings['flags']['fr'] = 'qc-fr.png';
 $polyglot_settings['flags']['pt'] = 'br.png';
 
-$polyglot_settings['flags']['en'] = 'gb.png';
-$polyglot_settings['flags']['fr'] = 'fr.png';
-$polyglot_settings['flags']['pt'] = 'br.png';
+$polyglot_settings['flags']['en'] = 'gb-24.png';
+$polyglot_settings['flags']['fr'] = 'fr-24.png';
+$polyglot_settings['flags']['pt'] = 'br-24.png';
 
 // these flags are 20x20px for use in the tinymce editor
-$polyglot_settings['flags-20']['en'] = 'gb-20.png';
-$polyglot_settings['flags-20']['fr'] = 'fr-20.png';
-$polyglot_settings['flags-20']['pt'] = 'br-20.png';
+$polyglot_settings['flags-20']['en'] = 'gb-24.png';
+$polyglot_settings['flags-20']['fr'] = 'fr-24.png';
+$polyglot_settings['flags-20']['pt'] = 'br-24.png';
 
 /*
 $polyglot_settings['flags']['de'] = 'de.png';
