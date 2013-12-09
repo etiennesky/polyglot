@@ -1,3 +1,2 @@
 These flags come from http://www.phpmyvisites.net/
--24.png flags are from IconDrawer http://icondrawer.com/ http://www.iconarchive.com/show/flags-icons-by-icondrawer.html
-
+-24.png flags are from GoSquared https://www.gosquared.com/resources/flag-icons/ http://www.iconarchive.com/show/flag-icons-by-gosquared.html
